@@ -1,5 +1,5 @@
 # SharpCoverPlus
-[![Build Status](https://travis-ci.org/gaillard/SharpCover.png)](https://travis-ci.org/gaillard/SharpCover)
+[![Build Status](https://travis-ci.org/Didstopia/SharpCoverPlus.svg?branch=master)](https://travis-ci.org/Didstopia/SharpCoverPlus)
 
 SharpCoverPlus is a fork of [SharpCover](https://github.com/gaillard/SharpCover), which aims to be an up to date version, compatible with the latest version of Mono.
 

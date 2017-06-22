@@ -20,10 +20,6 @@ env:
 - MSBUILD_CONFIG="Debug" CACHE_NAME="Debug Build Cache"
 - MSBUILD_CONFIG="Release" CACHE_NAME="Release Build Cache"
 
-# Install dependencies
-install:
-  - apt-get install mono-devel nunit-console
-
 # Build script
 script:
   - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover/Program.sln
