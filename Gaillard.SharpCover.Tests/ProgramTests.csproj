@@ -4,6 +4,7 @@
     <AssemblyName>ProgramTests</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
+    <ProjectGuid>{DF8443B6-5F12-4E44-AF13-0EBFF5120547}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

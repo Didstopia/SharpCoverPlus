@@ -5,6 +5,7 @@
     <AssemblyName>SharpCover</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
+    <ProjectGuid>{F1E7F0B8-BEC3-482B-BE05-92470FFCB93E}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="Counter.csproj" />
