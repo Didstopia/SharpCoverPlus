@@ -1,8 +1,40 @@
-language: c
-services: mongodb
+# Main language/toolchain
+language:
+  - csharp
+
+# Mono versions to test against
+mono:
+  - latest
+  - 5.0.1
+
+# Enable running inside a container (container-based infrastructure)
+sudo:
+  - false
+
+# Default linux distro (Ubuntu 14.04)
+dist:
+  - trusty
+
+# Global environment variables
+env:
+- MSBUILD_CONFIG="Debug" CACHE_NAME="Debug Build Cache"
+- MSBUILD_CONFIG="Release" CACHE_NAME="Release Build Cache"
+
+# Install dependencies
 install:
-  - sudo apt-get install mono-devel nunit-console
-script: sh build.sh
+  - apt-get install mono-devel nunit-console
+
+# Build script
+script:
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover/Program.sln
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover.Tests/ProgramTests.sln
+
+# Only build the master branch
 branches:
   only:
     - master
+
+# Caching
+cache:
+  directories:
+  - $HOME/.nuget/packages

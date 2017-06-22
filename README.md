@@ -54,7 +54,7 @@ Remember to rebuild your assemblies before you instrument again !
 
 It is highly recommended to use the includes/excludes to achieve a zero exit from `check`, otherwise you are cheating yourself !
 
-##Tool Build
+## Tool Build
 
 Make sure you are in the repository root.
 
