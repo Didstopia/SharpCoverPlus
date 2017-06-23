@@ -89,8 +89,9 @@ namespace Gaillard.SharpCover
             }
 
             var lineNum = -1;
-            if (instruction.SequencePoint != null)
-                lineNum = instruction.SequencePoint.StartLine;
+            var sequencePoint = method.DebugInformation.GetSequencePoint(instruction);
+            if (sequencePoint != null)
+                lineNum = sequencePoint.StartLine;
 
             var line = string.Join(", ",
                                    "Method: " + method.FullName,
@@ -163,7 +164,7 @@ namespace Gaillard.SharpCover
             string lastLine = null;//the sequence point for instructions that dont have one is the last set (if one exists)
             //need to copy instruction list since we modify using worker inserts
             foreach (var instruction in new List<Instruction>(method.Body.Instructions).OrderBy(i => i.Offset)) {
-                var sequencePoint = instruction.SequencePoint;
+                var sequencePoint = method.DebugInformation.GetSequencePoint(instruction);
                 if (sequencePoint != null) {
                     var line = File.ReadLines(sequencePoint.Document.Url).ElementAtOrDefault(sequencePoint.StartLine - 1);
                     if (line != null)
@@ -197,7 +198,7 @@ namespace Gaillard.SharpCover
         {
             //Mono.Cecil.[Mdb|Pdb].dll must be alongsize this exe to include sequence points from ReadSymbols
             var assembly = AssemblyDefinition.ReadAssembly(assemblyPath, new ReaderParameters { ReadSymbols = true });
-            var countReference = assembly.MainModule.Import(countMethodInfo);
+            var countReference = assembly.MainModule.ImportReference(countMethodInfo);
 
             foreach (var type in assembly.MainModule.GetTypes())//.Types doesnt include nested types
                 Instrument(type, countReference, config, writer, ref instrumentIndex);
