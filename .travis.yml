@@ -1,4 +1,4 @@
-# Main language/toolchain
+ # Main language/toolchain
 language:
   - csharp
 
@@ -22,8 +22,8 @@ env:
 
 # Build script
 script:
-  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover/Program.sln
-  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover.Tests/ProgramTests.sln
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild
 
 # Only build the master branch
 branches:

@@ -2,11 +2,13 @@
 <Project ToolsVersion="4.0" DefaultTargets="Rebuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <AssemblyName>Counter</AssemblyName>
+    <AssemblyName>SharpCoverPlus.Counter</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
     <ProjectGuid>{2F649F44-81FE-4D41-B52C-55513D5D5380}</ProjectGuid>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <ReleaseVersion>0.0.1</ReleaseVersion>
+    <RootNamespace>Didstopia.SharpCoverPlus</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>

@@ -3,8 +3,9 @@ using System.IO;
 using NUnit.Framework;
 using System.Linq;
 using System.Diagnostics;
+using Didstopia.SharpCoverPlus;
 
-namespace Gaillard.SharpCover.Tests
+namespace Didstopia.SharpCoverPlus.Tests
 {
     [TestFixture]
     public sealed class ProgramTests

@@ -1,15 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Rebuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <AssemblyName>ProgramTests</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>SharpCoverPlus</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
-    <ProjectGuid>{DF8443B6-5F12-4E44-AF13-0EBFF5120547}</ProjectGuid>
+    <ProjectGuid>{F1E7F0B8-BEC3-482B-BE05-92470FFCB93E}</ProjectGuid>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <ReleaseVersion>0.0.1</ReleaseVersion>
+    <RootNamespace>Didstopia.SharpCoverPlus</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <OutputPath>bin\Debug</OutputPath>
+    <RunWithWarnings>true</RunWithWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -17,10 +21,13 @@
     <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="Counter.csproj">
+      <Project>{2F649F44-81FE-4D41-B52C-55513D5D5380}</Project>
+      <Name>Counter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>..\packages\Mono.Cecil.0.10.0-beta6\lib\net40\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -33,27 +40,15 @@
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>..\packages\Mono.Cecil.0.10.0-beta6\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProgramTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TestTarget.csproj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestTarget.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Gaillard.SharpCover/Program.csproj">
-      <Project>{F1E7F0B8-BEC3-482B-BE05-92470FFCB93E}</Project>
-      <Name>Program</Name>
-    </ProjectReference>
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
 </Project>

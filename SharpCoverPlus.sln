@@ -1,13 +1,13 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program", "Gaillard.SharpCover\Program.csproj", "{F1E7F0B8-BEC3-482B-BE05-92470FFCB93E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCoverPlus", "SharpCoverPlus\SharpCoverPlus.csproj", "{F1E7F0B8-BEC3-482B-BE05-92470FFCB93E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Counter", "Gaillard.SharpCover\Counter.csproj", "{2F649F44-81FE-4D41-B52C-55513D5D5380}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Counter", "SharpCoverPlus\Counter.csproj", "{2F649F44-81FE-4D41-B52C-55513D5D5380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramTests", "Gaillard.SharpCover.Tests\ProgramTests.csproj", "{DF8443B6-5F12-4E44-AF13-0EBFF5120547}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCoverPlus.Tests", "SharpCoverPlus.Tests\SharpCoverPlus.Tests.csproj", "{DF8443B6-5F12-4E44-AF13-0EBFF5120547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTarget", "Gaillard.SharpCover.Tests\TestTarget.csproj", "{305F3408-2B08-4837-BC62-8E4490969C39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCoverPlus.Tests.TestTarget", "SharpCoverPlus.Tests\SharpCoverPlus.Tests.TestTarget.csproj", "{305F3408-2B08-4837-BC62-8E4490969C39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,5 +31,9 @@ Global
 		{305F3408-2B08-4837-BC62-8E4490969C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{305F3408-2B08-4837-BC62-8E4490969C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{305F3408-2B08-4837-BC62-8E4490969C39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		description = SharpCoverPlus is a fork of SharpCover, which aims to be an up to date version, compatible with the latest version of Mono.
+		version = 0.0.1
 	EndGlobalSection
 EndGlobal

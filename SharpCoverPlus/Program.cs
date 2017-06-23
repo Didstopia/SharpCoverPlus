@@ -11,9 +11,9 @@ using Newtonsoft.Json.Linq;
 
 [assembly: AssemblyVersion("1.0.2.*")]
 
-namespace Gaillard.SharpCover
+namespace Didstopia.SharpCoverPlus
 {
-    public static class Program
+    public class Program
     {
         public const string RESULTS_FILENAME = "coverageResults.txt", MISS_PREFIX = "MISS ! ", HITS_FILENAME_PREFIX = "coverageHits";
         private const string KNOWNS_FILENAME = "coverageKnowns";
@@ -203,7 +203,9 @@ namespace Gaillard.SharpCover
             foreach (var type in assembly.MainModule.GetTypes())//.Types doesnt include nested types
                 Instrument(type, countReference, config, writer, ref instrumentIndex);
 
-            assembly.Write(assemblyPath, new WriterParameters { WriteSymbols = true });
+            // FIXME: I have a feeling that this is causing issues, as I don't think we need to write to the assembly anymore?
+            //        Disabling the following line doesn't throw errors anymore, so let's see if we can get coverage working now..
+            //assembly.Write(assemblyPath, new WriterParameters { WriteSymbols = true });
 
             var counterPath = typeof(Counter).Assembly.Location;
 
