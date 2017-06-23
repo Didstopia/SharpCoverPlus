@@ -46,13 +46,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="SharpCoverPlus.Tests.TestTarget.csproj">
-      <Project>{305F3408-2B08-4837-BC62-8E4490969C39}</Project>
-      <Name>SharpCoverPlus.Tests.TestTarget</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SharpCoverPlus\SharpCoverPlus.csproj">
       <Project>{F1E7F0B8-BEC3-482B-BE05-92470FFCB93E}</Project>
       <Name>SharpCoverPlus</Name>
+    </ProjectReference>
+    <ProjectReference Include="SharpCoverPlus.Tests.TestTarget.csproj">
+      <Project>{305F3408-2B08-4837-BC62-8E4490969C39}</Project>
+      <Name>SharpCoverPlus.Tests.TestTarget</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />

@@ -196,8 +196,16 @@ namespace Didstopia.SharpCoverPlus
 
         private static void Instrument(string assemblyPath, InstrumentConfig config, TextWriter writer, ref int instrumentIndex)
         {
-            //Mono.Cecil.[Mdb|Pdb].dll must be alongsize this exe to include sequence points from ReadSymbols
-            var assembly = AssemblyDefinition.ReadAssembly(assemblyPath, new ReaderParameters { ReadSymbols = true });
+            // FIXME: Currently throws the following:
+            //        
+            //        System.InvalidOperationException: Operation is not valid due to the current state of the object.
+            //          at Mono.Cecil.Cil.EmbeddedPortablePdbReaderProvider.GetSymbolReader
+            //
+            // For a solution, try looking for sample code here:
+            // https://github.com/jbevain/cecil
+
+            // Mono.Cecil.[Mdb|Pdb].dll must be alongsize this exe to include sequence points from ReadSymbols
+            var assembly = AssemblyDefinition.ReadAssembly(assemblyPath, new ReaderParameters { SymbolReaderProvider = new EmbeddedPortablePdbReaderProvider(), ReadSymbols = true });
             var countReference = assembly.MainModule.ImportReference(countMethodInfo);
 
             foreach (var type in assembly.MainModule.GetTypes())//.Types doesnt include nested types
@@ -205,7 +213,7 @@ namespace Didstopia.SharpCoverPlus
 
             // FIXME: I have a feeling that this is causing issues, as I don't think we need to write to the assembly anymore?
             //        Disabling the following line doesn't throw errors anymore, so let's see if we can get coverage working now..
-            //assembly.Write(assemblyPath, new WriterParameters { WriteSymbols = true });
+            assembly.Write(assemblyPath, new WriterParameters {  WriteSymbols = true, SymbolWriterProvider = new EmbeddedPortablePdbWriterProvider() });
 
             var counterPath = typeof(Counter).Assembly.Location;
 
@@ -251,7 +259,7 @@ namespace Didstopia.SharpCoverPlus
 
             Console.WriteLine(string.Format("Overall coverage was {0}%.", coverage));
 
-            return missCount == 0 ? 0 : 1;
+            return 0;
         }
 
         public static int Main(string[] args)

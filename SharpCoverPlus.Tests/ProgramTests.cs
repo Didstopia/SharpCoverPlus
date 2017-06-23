@@ -19,15 +19,18 @@ namespace Didstopia.SharpCoverPlus.Tests
             onDotNet = Type.GetType("Mono.Runtime") == null;
 
             string buildCommand;
-            if (onDotNet) {
+            if (onDotNet)
+            {
                 buildCommand = @"msbuild";
-                testTargetExePath = @"bin\Debug\TestTarget.exe";
-            } else {
+                testTargetExePath = @"SharpCoverPlus.Tests\bin\Debug\SharpCoverPlus.Tests.TestTarget.exe";
+            }
+            else
+            {
                 buildCommand = "msbuild";
-                testTargetExePath = "bin/Debug/TestTarget.exe";
+                testTargetExePath = "SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe";
             }
 
-            var process = Process.Start(buildCommand, "TestTarget.csproj");
+            var process = Process.Start(buildCommand, "SharpCoverPlus.Tests/SharpCoverPlus.Tests.TestTarget.csproj");
             process.WaitForExit();
             Assert.AreEqual(0, process.ExitCode);
         }
@@ -36,15 +39,15 @@ namespace Didstopia.SharpCoverPlus.Tests
         public void NoBody()
         {
             var config =
-                @"{""assemblies"": [""bin/Debug/TestTarget.exe""], ""typeInclude"": "".*Tests.*Event.*""}";
+                @"{""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""], ""typeInclude"": "".*Tests.*Event.*""}";
 
             File.WriteAllText("testConfig.json", config);
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", "testConfig.json" }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", "testConfig.json" }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(0, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
             Assert.IsTrue(File.ReadLines(Program.RESULTS_FILENAME).Any());
         }
@@ -53,18 +56,18 @@ namespace Didstopia.SharpCoverPlus.Tests
         public void Covered()
         {
             var config =
-                @"{""assemblies"": [""bin/Debug/TestTarget.exe""], ""typeInclude"": "".*TestTarget"", ""methodInclude"": "".*Covered.*""}";
+                @"{""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""], ""typeInclude"": "".*TestTarget"", ""methodInclude"": "".*Covered.*""}";
 
             File.WriteAllText("testConfig.json", config);
 
             //write some extraneous hit files to make sure they dont affect run
             File.WriteAllText(Program.HITS_FILENAME_PREFIX, "doesnt matter");
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", "testConfig.json" }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", "testConfig.json" }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(0, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
             Assert.IsTrue(File.ReadLines(Program.RESULTS_FILENAME).Any());
         }
@@ -72,15 +75,15 @@ namespace Didstopia.SharpCoverPlus.Tests
         [Test]
         public void UncoveredIf()
         {
-            var config = @"{""assemblies"": [""bin/Debug/TestTarget.exe""], ""methodInclude"": "".*UncoveredIf.*""}";
+            var config = @"{""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""], ""methodInclude"": "".*UncoveredIf.*""}";
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", config }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", config }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(1, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
-            var missCount = File.ReadLines(Program.RESULTS_FILENAME).Where(l => l.StartsWith(Program.MISS_PREFIX)).Count();
+            var missCount = File.ReadLines(Program.RESULTS_FILENAME).Count(l => l.StartsWith(Program.MISS_PREFIX, StringComparison.Ordinal));
             var knownCount = File.ReadLines(Program.RESULTS_FILENAME).Count();
 
             Assert.IsTrue(knownCount > 0);
@@ -91,15 +94,15 @@ namespace Didstopia.SharpCoverPlus.Tests
         [Test]
         public void UncoveredLeave()
         {
-            var config = @"{""assemblies"": [""bin/Debug/TestTarget.exe""], ""methodInclude"": "".*UncoveredLeave.*""}";
+            var config = @"{""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""], ""methodInclude"": "".*UncoveredLeave.*""}";
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", config }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", config }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(1, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
-            var missCount = File.ReadLines(Program.RESULTS_FILENAME).Where(l => l.StartsWith(Program.MISS_PREFIX)).Count();
+            var missCount = File.ReadLines(Program.RESULTS_FILENAME).Count(l => l.StartsWith(Program.MISS_PREFIX, StringComparison.Ordinal));
             var knownCount = File.ReadLines(Program.RESULTS_FILENAME).Count();
 
             Assert.IsTrue(knownCount > 0);
@@ -110,13 +113,13 @@ namespace Didstopia.SharpCoverPlus.Tests
         [Test]
         public void Nested()
         {
-            var config = @"{""assemblies"": [""bin/Debug/TestTarget.exe""], ""typeInclude"": "".*Nested""}";
+            var config = @"{""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""], ""typeInclude"": "".*Nested""}";
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", config }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", config }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(0, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
             Assert.IsTrue(File.ReadLines(Program.RESULTS_FILENAME).Any());
         }
@@ -125,23 +128,23 @@ namespace Didstopia.SharpCoverPlus.Tests
         public void LineExcludes()
         {
             var config =
-@"{
-    ""assemblies"": [""bin/Debug/TestTarget.exe""],
-    ""typeInclude"": "".*TestTarget"",
-    ""methodInclude"": "".*LineExcludes.*"",
-    ""methodBodyExcludes"": [
-        {
-            ""method"": ""System.Void Gaillard.SharpCover.Tests.TestTarget::LineExcludes()"",
-            ""lines"": [""++i;"", ""} catch (Exception) {"", ""var b = false; b = !b;//will never get here"", ""}""]
-        }
-    ]
-}";
+            @"{
+			    ""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""],
+			    ""typeInclude"": "".*TestTarget"",
+			    ""methodInclude"": "".*LineExcludes.*"",
+			    ""methodBodyExcludes"": [
+			        {
+			            ""method"": ""System.Void Didstopia.SharpCoverPlus.Tests.TestTarget::LineExcludes()"",
+			            ""lines"": [""++i;"", ""} catch (Exception) {"", ""var b = false; b = !b;//will never get here"", ""}""]
+			        }
+			    ]
+			}";
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", config }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", config }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(0, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
             Assert.IsTrue(File.ReadLines(Program.RESULTS_FILENAME).Any());
         }
@@ -156,23 +159,23 @@ namespace Didstopia.SharpCoverPlus.Tests
                 offsets = "9, 10, 11, 12, 13";
 
             var config =
-string.Format(@"{{
-    ""assemblies"": [""bin/Debug/TestTarget.exe""],
-    ""typeInclude"": "".*TestTarget"",
-    ""methodInclude"": "".*OffsetExcludes.*"",
-    ""methodBodyExcludes"": [
-        {{
-            ""method"": ""System.Void Gaillard.SharpCover.Tests.TestTarget::OffsetExcludes()"",
-            ""offsets"": [{0}]
-        }}
-    ]
-}}", offsets);
+                string.Format(@"{{
+				    ""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""],
+				    ""typeInclude"": "".*TestTarget"",
+				    ""methodInclude"": "".*OffsetExcludes.*"",
+				    ""methodBodyExcludes"": [
+				        {{
+				            ""method"": ""System.Void Didstopia.SharpCoverPlus.Tests.TestTarget::OffsetExcludes()"",
+				            ""offsets"": [{0}]
+				        }}
+				    ]
+				}}", offsets);
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", config }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", config }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(0, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
             Assert.IsTrue(File.ReadLines(Program.RESULTS_FILENAME).Any());
         }
@@ -181,13 +184,13 @@ string.Format(@"{{
         [Test]
         public void Constrained()
         {
-            var config = @"{""assemblies"": [""bin/Debug/TestTarget.exe""], ""typeInclude"": "".*Constrained""}";
+            var config = @"{""assemblies"": [""SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe""], ""typeInclude"": "".*Constrained""}";
 
-            Assert.AreEqual(0, Program.Main(new []{ "instrument", config }));
+            Assert.AreEqual(0, Program.Main(new[] { "instrument", config }));
 
             Process.Start(testTargetExePath).WaitForExit();
 
-            Assert.AreEqual(0, Program.Main(new []{ "check" }));
+            Assert.AreEqual(0, Program.Main(new[] { "check" }));
 
             Assert.IsTrue(File.ReadLines(Program.RESULTS_FILENAME).Any());
         }
@@ -201,13 +204,13 @@ string.Format(@"{{
         [Test]
         public void BadCommand()
         {
-            Assert.AreEqual(2, Program.Main(new []{ "BAD_COMMAND" }));
+            Assert.AreEqual(2, Program.Main(new[] { "BAD_COMMAND" }));
         }
 
         [Test]
         public void MissingConfig()
         {
-            Assert.AreEqual(2, Program.Main(new []{ "instrument" }));
+            Assert.AreEqual(2, Program.Main(new[] { "instrument" }));
         }
     }
 }

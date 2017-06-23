@@ -96,7 +96,7 @@ namespace Didstopia.SharpCoverPlus.Tests.TestTarget
             ++j;
 
             foreach (var k in new [] { "boo", "foo" }) {
-                k.EndsWith("oo");
+                k.EndsWith("oo", StringComparison.Ordinal);
             }
 
             for (var k = 0; k < 2; ++k)

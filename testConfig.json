@@ -1,0 +1,1 @@
+{"assemblies": ["SharpCoverPlus.Tests/bin/Debug/SharpCoverPlus.Tests.TestTarget.exe"], "typeInclude": ".*Tests.*Event.*"}
