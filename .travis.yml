@@ -24,8 +24,7 @@ env:
 script:
   - nuget restore
   - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild
-  - find / -type f -executable -name mono
-  - mono SharpCoverPlus/bin/${MSBUILD_CONFIG}/SharpCoverPlus.exe instrument travisCoverageConfig.json
+  - /usr/share/cli-common/runtimes.d/mono SharpCoverPlus/bin/${MSBUILD_CONFIG}/SharpCoverPlus.exe instrument travisCoverageConfig.json
 
 # Only build the master branch
 branches:
