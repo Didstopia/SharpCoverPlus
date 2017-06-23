@@ -1,4 +1,4 @@
-# Main language/toolchain
+ # Main language/toolchain
 language:
   - csharp
 
@@ -22,8 +22,10 @@ env:
 
 # Build script
 script:
-  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover/Program.sln
-  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild Gaillard.SharpCover.Tests/ProgramTests.sln
+  - nuget restore
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild
+  ## FIXME: For some reason this image doesn't have a valid/good mono runtime, not sure why
+  #- /usr/share/cli-common/runtimes.d/mono SharpCoverPlus/bin/${MSBUILD_CONFIG}/SharpCoverPlus.exe instrument travisCoverageConfig.json
 
 # Only build the master branch
 branches:

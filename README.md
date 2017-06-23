@@ -1,6 +1,8 @@
 # SharpCoverPlus
 [![Build Status](https://travis-ci.org/Didstopia/SharpCoverPlus.svg?branch=master)](https://travis-ci.org/Didstopia/SharpCoverPlus)
 
+**NOTE:** This is still very much a _work in progress_, and until migration to Mono 5/latest Mono.Cecil is done, it's probably not usable in any shape, way or form.
+
 SharpCoverPlus is a fork of [SharpCover](https://github.com/gaillard/SharpCover), which aims to be an up to date version, compatible with the latest version of Mono.
 
 C# code coverage tool with Linux ([Mono](https://github.com/mono/mono)) and Windows ([.NET 4.0](http://www.microsoft.com/en-us/download/details.aspx?id=17851)) support.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gaillard.SharpCover.Tests
+namespace Didstopia.SharpCoverPlus.Tests.TestTarget
 {
     public interface IEvent
     {
@@ -161,7 +161,7 @@ namespace Gaillard.SharpCover.Tests
             OffsetExcludes();
             LineExcludes();
 
-            var eventUsage = new Gaillard.SharpCover.Tests.EventUsage();
+            var eventUsage = new EventUsage();
             eventUsage.TheEvent += eventUsage.EventMethod;
             eventUsage.RaiseEvent();
             eventUsage.TheEvent -= eventUsage.EventMethod;

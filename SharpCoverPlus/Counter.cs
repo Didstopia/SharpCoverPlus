@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 [assembly: AssemblyVersion("1.0.2.*")]
 
-namespace Gaillard.SharpCover
+namespace Didstopia.SharpCoverPlus
 {
     public static class Counter
     {

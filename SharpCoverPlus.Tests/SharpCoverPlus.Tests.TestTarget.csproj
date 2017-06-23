@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Rebuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Counter</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>SharpCoverPlus.Tests.TestTarget</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
-    <ProjectGuid>{2F649F44-81FE-4D41-B52C-55513D5D5380}</ProjectGuid>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+	<DebugType>full</DebugType>
+	<ProjectGuid>{305F3408-2B08-4837-BC62-8E4490969C39}</ProjectGuid>
+	<TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+	<ReleaseVersion>0.0.1</ReleaseVersion>
+	<RootNamespace>Didstopia.SharpCoverPlus.Tests</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
     <OutputPath>bin\Debug</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
@@ -21,7 +22,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Counter.cs" />
+    <Compile Include="TestTarget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
 </Project>
