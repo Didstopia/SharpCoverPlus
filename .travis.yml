@@ -22,8 +22,10 @@ env:
 
 # Build script
 script:
-  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild
-  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild && \
+    mono SharpCoverPlus/bin/${MSBUILD_CONFIG}/SharpCoverPlus.exe instrument travisCoverageConfig.json
+  - msbuild /p:Configuration=${MSBUILD_CONFIG} /t:Restore,Rebuild && \
+    mono SharpCoverPlus/bin/${MSBUILD_CONFIG}/SharpCoverPlus.exe instrument travisCoverageConfig.json
 
 # Only build the master branch
 branches:
